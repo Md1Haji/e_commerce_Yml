@@ -244,6 +244,187 @@ The "Update Order Status" functionality allows users to modify the status of an 
 }
 ```
 
+
+# POST METHOD: TO INSERT INVENTORY DETAILS IN THE DYNAMODB DATABASE.
+
+## RESEARCH
+
+ --> I referred dynamodb tutorials and stack overflow website.
+
+## LOGIC
+
+ 1. METHOD: POST
+
+ 2. ENDPOINT: /inventory 
+
+ 3. Created the node js serverless aws lambda function that will insert the inventory details into the database.
+
+ 4. connect to database.
+
+ 5. Configure AWS credentials and DynamoDB endpoint.
+
+ 6. Extract product_id and availableQuantity from the requestBody.
+
+ 7. Define parameters for putting an item into the 'inventory' table.
+
+ 8.  Insert the item into the 'inventory' table.
+
+ 9. If the insert is successful, return a success response with status code 200 and the inserted data.
+
+ 10.  If there's an error during the insert, catch the error, log it, and return an error response with status code 500 and an error message 
+    in the body.
+
+ 
+
+## SUMMARY:
+
+-->In this appilcation we are using node js serverless code to inventory details by required details from the postman.
+
+
+
+ 
+
+# PUT METHOD: TO UPDATE INVENTORY DETAILS IN TO THE DATABASE.
+
+## RESEARCH
+
+ --> I referred dynamodb tutorials and stack overflow website.
+
+## LOGIC
+
+ 1. METHOD: PUT
+
+ 2. ENDPOINT: /inventory/{inventory_id}
+
+ 3. Created the node js serverless aws lambda function that will update the inventory details.
+
+ 4. connect to database.
+    
+ 5. Configure AWS credentials and DynamoDB endpoint.
+
+ 6. Extract updateQuantity from the requestBody.
+ 
+ 7. Retrieve inventory_id from pathparameters.
+
+ 8. Define parameters for updating an item in the 'inventory' table.
+
+ 9. Try to update the item in the DynamoDB table using the defined parameters.
+
+ 10. If the update is successful, return a success response with status code 200 and the updated item attributes in the body.
+
+ 11. If there's an error during the update, catch the error, log it, and return an error response with status code 500 and an error message 
+    in the body.
+
+## SUMMARY:
+
+-->In this appilcation we are using node js serverless code to update quantity details.
+
+
+
+
+# GET METHOD: TO GET ALL INVENTORY DETAILS.
+
+## RESEARCH
+
+ --> I referred dynamodb tutorials and stack overflow website.
+
+## LOGIC
+
+ 1. METHOD: GET
+
+ 2. ENDPOINT: /inventory
+
+ 3. Created the node js serverless aws lambda function that will get all inventory details.
+
+ 4. connect to database.
+  
+ 5. Configure AWS credentials and DynamoDB endpoint.
+
+ 6. Define parameters for scanning all items in the 'inventory' table.
+
+ 7. Try to scan all items in the DynamoDB table using the defined parameters.
+
+ 8. If the scan is successful, return a success response with status code 200 and the scanned items in the body.
+
+ 9. If there's an error during the scan, catch the error, and return an error response with status code 500 and an error message in the body.
+
+ 
+
+## SUMMARY:
+
+-->In this appilcation we are using node js serverless code to get all inventory details.
+    
+
+
+# GET METHOD: TO GET INVENTORY DETAILS FOR PARTICULAR INVENTORY_ID
+
+## RESEARCH
+
+ --> I referred dynamodb tutorials and stack overflow website.
+
+## LOGIC
+
+ 1. METHOD: GET
+
+ 2. ENDPOINT: /inventory/{inventory_id}
+
+ 3. Created the node js serverless aws lambda function that will get inventory details particular id.
+
+ 4. connect to database.
+  
+ 5. Configure AWS credentials and DynamoDB endpoint.
+
+ 6. Extract the inventory ID from the path parameters of the event.
+
+ 7. Define parameters for scanning all items in the 'inventory' table.
+
+ 8. Try to scan all items in the DynamoDB table using the defined parameters.
+
+ 9. If the scan is successful, return a success response with status code 200 and the scanned items in the body.
+
+ 10. If there's an error during the scan, catch the error, and return an error response with status code 500 and an error message in the body.
+
+
+## SUMMARY:
+
+-->In this appilcation we are using go serverless code to get inventory details of a particular id.
+
+
+# DELETE METHOD: TO DELETE INVENTORY DETAILS OF PARTICULAR INVENTORY_ID
+
+## RESEARCH
+
+ --> I referred dynamodb tutorials and stack overflow website.
+
+## LOGIC
+
+ 1. METHOD: DELETE
+
+ 2. ENDPOINT: /inventory/{inventory_id}
+
+ 3. Created the node js serverless aws lambda function that will delete inventory details of particular id.
+
+ 4. connect to database.
+  
+ 5. Configure AWS credentials and DynamoDB endpoint.
+
+ 6. Extract the inventory ID from the path parameters of the event.
+
+ 7. Try to delete a product from the 'inventory' table based on the provided inventory ID.
+
+ 8. If the deletion is successful, return a success response with status code 200 and a message indicating the successful deletion, along with any deleted data.
+
+ 9. If there's an error during the deletion process, catch the error, and return an error response with status code 500 and an error message indicating the failure to delete the item.
+
+
+## SUMMARY:
+
+-->In this appilcation we are using node js serverless code to delete inventory details of a particular id.
+
+
+
+
+
 # SearchCart Function
 
 ## Logic
