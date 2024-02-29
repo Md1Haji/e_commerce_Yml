@@ -221,22 +221,22 @@ DELETE /orders/12345
 ```
 
 
-# Update Order Status
+### Update Order Status
 
-## Description
+#### Description
 The "Update Order Status" functionality allows users to modify the status of an existing order.
 
 ## Input
 - `orderId`: The unique identifier of the order to be updated.
 - `status`: The new status of the order (e.g., confirmed, cancelled, completed, closed).
 
-## Workflow
+#### Workflow
 1. Send a POST request to the designated endpoint (`/updateOrderStatus`).
 2. Include the `orderId` and `status` in the request body as JSON data.
 3. The system updates the status of the specified order in the database.
 4. Return a confirmation message indicating the successful update of the order status.
 
-## Request Body
+#### Request Body
 ```json
 {
   "orderId": "12345",
@@ -393,8 +393,6 @@ The "Update Order Status" functionality allows users to modify the status of an 
 # DELETE METHOD: TO DELETE INVENTORY DETAILS OF PARTICULAR INVENTORY_ID
 
 ## RESEARCH
-
- --> I referred dynamodb tutorials and stack overflow website.
 
 ## LOGIC
 
