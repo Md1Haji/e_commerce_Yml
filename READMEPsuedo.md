@@ -423,4 +423,120 @@ The "Update Order Status" functionality allows users to modify the status of an 
 
 
 
+#### PRODUCT API WITH DYNAMODB 
+ 
+## Overview
+ 
+     This API allows users to manage products, including inserting, retrieving, updating, and deleting product records.
+ 
+### Insert product
+
+    Endpoint: baseUrl/dev/product
+
+    Method: POST
+
+    Description: Insert a new product into the 'product' collection.
+
+    Request Body:
+
+    - `name` (string): The name of the product.
+    - `description` (string): The description of the product.
+    - `price` (number): the price of the product.
+    - `quantity` (number): the quantity of the product.
+    - `unit` (number): the unit of the product in kg and piece.
+    - `category` (string):the category of the product.
+    - `image` (string):the image of the product.
+
+    Product data including name, description, price, and quantity. 
+
+    Responses:
+
+    201 Created: Product created successfully
+    400 Bad Request: Invalid request body
+    500 Internal Server Error: Error response.
+    
+
+### Retrieve product
+
+    Endpoint: baseUrl/dev/product
+
+    Method: GET
+
+    Description: Retrieve all product from the 'product' collection..
+
+    Responses:
+
+    200 OK: Successful response with the product data
+    404 Not Found: Product with the specified ID not found
+    500 Internal Server Error: Error response.
+
+
+### Retrieve product by ID
+
+    Endpoint: baseUrl/dev/product/{id}
+
+    Method: GET
+    
+    Description: Retrieve a specific product by its ID from the 'product' collection.
+
+    Parameters:
+
+    id (path parameter): The ID of the product to retrieve.
+
+    Responses:
+
+    200 OK: Successful response with the product data
+    404 Not Found: Product with the specified ID not found
+    500 Internal Server Error: Error response.
+
+
+ 
+### Update product
+
+    Endpoint: baseUrl/dev/product/{id}
+
+    Method: PUT
+
+    Description: Update an existing product in the 'product' collection.
+
+    Parameters:
+
+    id (path parameter): The ID of the product to update.
+
+    Request Body:
+
+    - `name` (string): The name of the product.
+    - `description` (string): The description of the product.
+    - `price` (number): the price of the product.
+    - `quantity` (number): the quantity of the product.
+    - `unit` (number): the unit of the product in kg and piece.
+    - `category` (string):the category of the product.
+    - `image` (string):the image of the product.
+
+    Responses:
+
+    200 OK: Product updated successfully
+    404 Not Found: Product with the specified ID not found
+    500 Internal Server Error: Error response.
+
+
+### Delete product
+
+    Endpoint: baseUrl/dev/product/{productId}
+
+    Method: DELETE
+
+    Description: Delete an existing product from the 'product' collection.
+    
+    Parameters:
+    
+    id (path parameter): The ID of the product to delete.
+    
+    Responses:
+
+    204 No Content: Product deleted successfully
+    
+    404 Not Found: Product with the specified ID not found
+    
+    500 Internal Server Error: Error response.
 
