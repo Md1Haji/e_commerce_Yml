@@ -243,3 +243,150 @@ The "Update Order Status" functionality allows users to modify the status of an 
   "status": "confirmed"
 }
 ```
+
+# SearchCart Function
+
+## Logic
+
+1. Initialize DynamoDB Document Client:
+   - Create an instance of the DynamoDB Document Client from the AWS SDK, specifying the region and endpoint.
+
+2. Define the search function:
+   - Define an asynchronous function named `search`.
+   - Log the start of the search function.
+   - Construct a `params` object specifying the TableName as 'cart'.
+   - Log the scanning of the DynamoDB table.
+   - Use the `scan` method of the DynamoDB Document Client to scan the specified DynamoDB table.
+   - Await the response from the scan operation.
+   - If successful:
+     - Log the successful search and return a response object with status code 200 OK.
+     - Include the retrieved items from DynamoDB in the response body.
+   - If an error occurs during the scan operation:
+     - Log the error.
+     - Return a response object with status code 500 Internal Server Error.
+     - Include an error message in the response body indicating the failure to retrieve data from DynamoDB.
+
+3. Export the search function:
+   - Export the `search` function to make it accessible from other modules.
+
+
+
+# GetItemById Function
+
+## Logic
+
+1. Configure the AWS SDK:
+   - Import the AWS SDK.
+   - Configure the AWS SDK to use the local DynamoDB endpoint by updating the AWS configuration with the region and endpoint details.
+
+2. Initialize DynamoDB Document Client:
+   - Create an instance of the DynamoDB Document Client from the AWS SDK.
+
+3. Define the getItemById function:
+   - Define an asynchronous function named `getItemById` which takes an `event` parameter.
+   - Extract the 'itemid' from the path parameters of the incoming request.
+   - Construct a `params` object specifying the TableName as 'cart' and the Key as the 'itemid'.
+   - Try to retrieve the item from DynamoDB using the `get` method of the DynamoDB Document Client.
+   - If the item is not found:
+     - Return a response object with status code 404 Not Found.
+     - Include a message indicating that the item was not found.
+   - If successful:
+     - Return a response object with status code 200 OK.
+     - Include the retrieved item in the response body.
+   - If an error occurs during the retrieval:
+     - Log the error.
+     - Return a response object with status code 500 Internal Server Error.
+     - Include an error message in the response body indicating the failure to retrieve the item from DynamoDB.
+
+4. Export the getItemById function:
+   - Export the `getItemById` function to make it accessible from other modules.
+
+
+
+# InsertItem Function
+
+## Logic
+
+1. Configure the AWS SDK:
+   - Import the AWS SDK.
+   - Configure the AWS SDK to use the local DynamoDB endpoint by updating the AWS configuration with the region and endpoint details.
+
+2. Initialize DynamoDB Document Client:
+   - Create an instance of the DynamoDB Document Client from the AWS SDK.
+
+3. Define the insert function:
+   - Define an asynchronous function named `insert` which takes an `event` parameter.
+   - Parse the request body from the event to extract the data to be inserted into DynamoDB.
+   - Construct a `params` object specifying the TableName as 'cart' and the Item as the parsed request body.
+   - Try to insert data into the DynamoDB table using the `put` method of the DynamoDB Document Client.
+   - If successful:
+     - Return a response object with status code 200 OK.
+     - Include a message indicating successful data insertion in the response body.
+   - If an error occurs during the insertion:
+     - Log the error.
+     - Return a response object with status code 500 Internal Server Error.
+     - Include an error message in the response body indicating the failure to insert data into DynamoDB.
+
+4. Export the insert function:
+   - Export the `insert` function to make it accessible from other modules.
+
+
+
+# UpdateQuantity Function
+
+## Logic
+
+1. Configure the AWS SDK:
+   - Import the AWS SDK.
+   - Configure the AWS SDK to use the local DynamoDB endpoint by updating the AWS configuration with the region and endpoint details.
+
+2. Initialize DynamoDB Document Client:
+   - Create an instance of the DynamoDB Document Client from the AWS SDK.
+
+3. Define the updateQuantity function:
+   - Define an asynchronous function named `updateQuantity` which takes an `event` parameter.
+   - Extract the 'itemid' from the path parameters of the incoming request.
+   - Parse the request body from the event to extract the updated quantity.
+   - Construct a `params` object specifying the TableName as 'cart', the Key as the 'itemid', and the UpdateExpression to update the quantity.
+   - Try to update the quantity in DynamoDB using the `update` method of the DynamoDB Document Client.
+   - If successful:
+     - Return a response object with status code 200 OK.
+     - Include the updated item in the response body.
+   - If an error occurs during the update:
+     - Log the error.
+     - Return a response object with status code 500 Internal Server Error.
+     - Include an error message in the response body indicating the failure to update the quantity in DynamoDB.
+
+4. Export the updateQuantity function:
+   - Export the `updateQuantity` function to make it accessible from other modules.
+
+
+
+# DeleteCart Function
+
+## Logic
+
+1. Import the AWS SDK:
+   - Import the AWS SDK to use its functionalities.
+
+2. Set DynamoDB Local endpoint:
+   - Create an instance of the `AWS.Endpoint` class with the endpoint URL for DynamoDB Local.
+   - Update the AWS configuration to set the region to 'localhost' and specify the DynamoDB endpoint URL.
+
+3. Create a DynamoDB DocumentClient:
+   - Instantiate a DynamoDB DocumentClient from the AWS SDK to interact with DynamoDB.
+
+4. Define the deleteCart function:
+   - Define an asynchronous function named `deleteCart` which takes an `event` parameter.
+   - Extract the 'itemid' from the path parameters of the incoming request.
+   - Define the parameters for the delete operation, specifying the TableName as 'cart' and the Key as the 'itemid'.
+   - Try to delete the item from the DynamoDB table using the `delete` method of the DocumentClient.
+   - If successful:
+     - Return a response object with status code 200 OK.
+     - Include a message indicating successful deletion and the deleted item data in the response body.
+   - If an error occurs during the deletion:
+     - Return a response object with status code 500 Internal Server Error.
+     - Include an error message indicating the failure to delete the item in the response body.
+
+5. Export the deleteCart function:
+   - Export the `deleteCart` function to make it accessible from other modules.
