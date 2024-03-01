@@ -422,9 +422,7 @@ The "Update Order Status" functionality allows users to modify the status of an 
 -->In this appilcation we are using node js serverless code to delete inventory details of a particular id.
 
 
-
 #### PRODUCT API  
-
  
 ##### Overview:
  
@@ -444,7 +442,7 @@ The "Update Order Status" functionality allows users to modify the status of an 
 
 #### Operations:
 
-##### Create product (POST):
+### Create product (POST):
 
 #### Description:
 
@@ -452,13 +450,13 @@ Creates a new product in the database.
 
 #### Input:
 
-- `name` (string): The name of the product.
-- `description` (string): The description of the product.
-- `price` (number): the price of the product.
-- `quantity` (number): the quantity of the product.
-- `unit` (number): the unit of the product in kg and piece.
-- `category` (string):the category of the product.
-- `image` (string):the image of the product.
+- name (string): The name of the product.
+- description (string): The description of the product.
+- price (number): the price of the product.
+- quantity (number): the quantity of the product.
+- unit (number): the unit of the product in kg and piece.
+- category (string):the category of the product.
+- image (string):the image of the product.
 
 #### Workflow:
 
@@ -492,13 +490,12 @@ Creates a new product in the database.
 ```
 
 #### Responses:
+1. 201 Created: Product created successfully
+2. 400 Bad Request: Invalid request body
+3. 500 Internal Server Error: Error response.
 
-- 201 Created: Product created successfully
-- 400 Bad Request: Invalid request body
-- 500 Internal Server Error: Error response.
 
-
-##### Get All product (GET)
+### Get All product (GET)
 
 #### Description:
 
@@ -584,13 +581,12 @@ Retrieves all product stored in the database.
 ```
 
 #### Responses:
+1. 200 OK : Successful response with the product data
+2. 404 Not Found : Product with the specified ID not found
+3. 500 Internal Server Error : Error response.
 
-- 200 OK: Successful response with the product data
-- 404 Not Found: Product with the specified ID not found
-- 500 Internal Server Error: Error response.
 
-
-##### Get product By ID (GET):
+### Get product By ID (GET):
 
 #### Description:
 
@@ -598,7 +594,7 @@ Retrieves a specific product from the database based on its unique product ID.
 
 #### Input:
 
-- `id`: Unique identifier of the product to retrieve.
+- id: Unique identifier of the product to retrieve.
 
 #### Workflow:
 
@@ -608,7 +604,7 @@ Retrieves a specific product from the database based on its unique product ID.
 
 #### path parameters:
 
-- `id`: Unique identifier of the product to retrieve.
+- id: Unique identifier of the product to retrieve.
 
 #### Response:
 
@@ -653,26 +649,25 @@ Retrieves a specific product from the database based on its unique product ID.
 }
 ```
 #### Responses:
+1. 200 OK: Successful response with the product data
+2. 404 Not Found: Product with the specified ID not found
+3. 500 Internal Server Error: Error response.
 
-- 200 OK: Successful response with the product data
-- 404 Not Found: Product with the specified ID not found
-- 500 Internal Server Error: Error response.
 
-
-##### Update product (PUT):
+### Update product (PUT):
 
 #### Description:
 
 Updates the details of an existing product in the database based on its unique product ID.
 
 #### Input
-- `name` (string): The name of the product.
-- `description` (string): The description of the product.
-- `price` (number): the price of the product.
-- `quantity` (number): the quantity of the product.
-- `unit` (number): the unit of the product in kg and piece.
-- `category` (string):the category of the product.
-- `image` (string):the image of the product.
+- name (string): The name of the product.
+- description (string): The description of the product.
+- price (number): the price of the product.
+- quantity (number): the quantity of the product.
+- unit (number): the unit of the product in kg and piece.
+- category (string):the category of the product.
+- image (string):the image of the product.
 
 #### Workflow
 1. Connect to the database (e.g., AWS DynamoDB).
@@ -683,7 +678,7 @@ Updates the details of an existing product in the database based on its unique p
 
 #### path parameters:
 
-- `id`: Unique identifier of the product to update the data.
+- id: Unique identifier of the product to update the data.
 
 #### Logic:
 
@@ -724,13 +719,12 @@ Updates the details of an existing product in the database based on its unique p
 ```
    
 #### Responses:
+1. 200 OK: Product updated successfully
+2. 404 Not Found: Product with the specified ID not found
+3. 500 Internal Server Error: Error response.
 
-- 200 OK: Product updated successfully
-- 404 Not Found: Product with the specified ID not found
-- 500 Internal Server Error: Error response.
 
-
-##### Delete product (DELETE):
+### Delete product (DELETE):
 
 #### Description:
 
@@ -771,10 +765,9 @@ http://localhost:3000/dev/Products/f92c4124-f6ad-468d-bf1b-3e7bd1eccd0e
 
 #### Responses:
 
-- 204 No Content: Product deleted successfully  
-- 404 Not Found: Product with the specified ID not found  
-- 500 Internal Server Error: Error response.
-
+1.204 No Content: Product deleted successfully  
+2.404 Not Found: Product with the specified ID not found  
+3.500 Internal Server Error: Error response.
 
 # SearchCart Function
 
