@@ -822,3 +822,98 @@ The "Update Order Status" functionality allows users to modify the status of an 
 9. If an error occurs during the delete operation:
    - Return an error response with status code 500 and a message indicating the error encountered during deletion.
 
+#  dynamodb lambda API
+ 
+## Overview
+- The API's pseudo code includes logic for inserting, retrieving, updating, and deleting customer data in a DynamoDB 'Customer' table, emphasizing CRUD operations and error handling.
+ 
+# InsertCustomer Function
+
+## Logic
+
+- **Parse the incoming event to extract the request body.**
+- **Extract the value from the request body: details.**
+- **Generate a unique identifier (e.g., customer_Id) using uuidv4.**
+- **Create a DynamoDB `params` object with the following:**
+  - TableName: 'Customer'
+  - Item: Object containing customer_Id and details.
+- **Use the DynamoDB `post` method to insert the data into the 'Customer' table.**
+- **If successful:**
+  - Return a response with status code 200 OK.
+  - Include a success message in the response body.
+- **If an error occurs:**
+  - Return a response with status code 500 Internal Server Error.
+  - Include an error message in the response body.
+
+# GetCustomerById Function
+
+## Logic
+
+- **Extract the value from the path parameters: customer_Id.**
+- **If customer_Id is missing:**
+   - Return a response with status code 400 Bad Request.
+   - Include a message indicating that Customer ID is required.
+- **Create a DynamoDB `params` object with the following:**
+   - TableName: 'Customer'
+   - Key: Object containing customer_Id.
+- **Try to get data from DynamoDB using the `get` method.**
+- **If successful:**
+   - Return a response with status code 200 OK.
+   - Include the retrieved customer data in the response body.
+- **If an error occurs:**
+   - Return a response with status code 500 Internal Server Error.
+   - Include an error message in the response body.
+
+# GetAllCustomer Function
+
+## Logic
+
+- **Create a DynamoDB `params` object with the following:**
+   - TableName: 'Customer'
+- **Try to scan data from DynamoDB using the `scan` method.**
+- **If successful:**
+   - Return a response with status code 200 OK.
+   - Include the list of all customer data in the response body.
+- **If an error occurs:**
+   - Return a response with status code 500 Internal Server Error.
+   - Include an error message in the response body.
+
+# UpdateCustomer Function
+
+## Logic
+
+- **Extract the value from the path parameters: customer_Id.**
+- **Parse the incoming event to extract the request body.**
+- **Extract the updated value from the request body: details.**
+- **Create a DynamoDB `params` object with the following:**
+   - TableName: 'Customer'
+   - Key: Object containing customer_Id.
+   - UpdateExpression: 'SET details = :details'
+   - ExpressionAttributeValues: { ':details': details }
+   - ReturnValues: 'ALL_NEW'
+- **Try to update data in DynamoDB using the `update` method.**
+- **If successful:**
+   - Return a response with status code 200 OK.
+   - Include a message and the updated customer data in the response body.
+- **If an error occurs:**
+   - Return a response with status code 500 Internal Server Error.
+   - Include an error message in the response body.
+
+# DeleteCustomer Function
+
+## Logic
+
+- **Extract the value from the path parameters: customer_Id.**
+- **If customer_Id is missing:**
+   - Return a response with status code 400 Bad Request.
+   - Include a message indicating that Customer ID is required.
+- **Create a DynamoDB `params` object with the following:**
+   - TableName: 'Customer'
+   - Key: Object containing customer_Id.
+- **Try to delete data from DynamoDB using the `delete` method.**
+- **If successful:**
+   - Return a response with status code 200 OK.
+   - Include a success message in the response body.
+- **If an error occurs:**
+   - Return a response with status code 500 Internal Server Error.
+   - Include an error message in the response body.
