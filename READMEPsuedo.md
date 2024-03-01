@@ -922,3 +922,233 @@ http://localhost:3000/dev/Products/f92c4124-f6ad-468d-bf1b-3e7bd1eccd0e
 
 5. Export the deleteCart function:
    - Export the `deleteCart` function to make it accessible from other modules.
+
+
+
+### CUSTOMERS PSUDO CODE 
+
+##  Customeradd -
+
+1. Import required modules: AWS SDK and uuid
+
+2. Configure AWS SDK to connect to local DynamoDB instance
+
+3. Create a DynamoDB DocumentClient instance
+
+4. Define a Lambda function named insertCustomer to insert customer data into DynamoDB
+
+5. Parse the incoming event body to extract customer details
+
+6. Generate a unique customer ID using uuidv4()
+
+7. Construct parameters for DynamoDB put operation:
+   - Define TableName as 'Customer'
+   - Set Item with customer_Id and customer_details
+
+8. Execute DynamoDB put operation using the DocumentClient instance and the constructed parameters
+
+9. If the put operation is successful:
+   - Return a success response with status code 200 and a message indicating successful insertion
+   - If an error occurs during the put operation:
+   - Return an error response with status code 500 and a message indicating the error encountered
+
+##  CustomerGetAll - 
+
+1. Import the AWS SDK module.
+
+2. Configure the AWS SDK to connect to the local DynamoDB instance.
+
+3. Create a DynamoDB DocumentClient instance.
+
+4. Define a Lambda function named getAllCustomer to retrieve all customer data from DynamoDB.
+
+5. Try the following:
+   a. Construct parameters for a DynamoDB scan operation:
+      - Set TableName as 'Customer'.
+   b. Execute the DynamoDB scan operation using the DocumentClient instance and the constructed parameters.
+   c. Store the result items in a variable named customer.
+
+6. If the scan operation is successful:
+   - Return a success response with status code 200 and the retrieved customer data in the response body.
+   - If an error occurs during the scan operation:
+   - Return an error response with status code 500 and a message indicating the error encountered.
+
+##  CustomerGetById -
+
+1. Import the AWS SDK module.
+
+2. Configure the AWS SDK to connect to the local DynamoDB instance.
+
+3. Create a DynamoDB DocumentClient instance.
+
+4. Define a Lambda function named getCustomerById to retrieve a customer's data by ID from DynamoDB.
+
+5. Extract the customer ID from the event's path parameters.
+
+6. If the customer ID is missing:
+   - Return a response with status code 400 and a message indicating that the customer ID is required.
+
+7. Construct parameters for a DynamoDB get operation:
+   - Set TableName as 'Customer'.
+   - Set Key with the extracted customer ID.
+
+8. Try the following:
+   a. Execute the DynamoDB get operation using the DocumentClient instance and the constructed parameters.
+   b. Store the retrieved item data in a variable named data.
+
+9. If the get operation is successful:
+   - Return a success response with status code 200 and the retrieved customer data in the response body.
+   
+10. If an error occurs during the get operation:
+   - Return an error response with status code 500 and a message indicating the error encountered.
+
+##  CustomerUpdateById -
+
+1. Import the AWS SDK module.
+
+2. Configure the AWS SDK to connect to the local DynamoDB instance.
+
+3. Create a DynamoDB DocumentClient instance.
+
+4. Define a Lambda function named updateCustomer to update customer data in DynamoDB.
+
+5. Try the following:
+   a. Extract the customer ID from the event's path parameters.
+   b. Parse the request body to extract the updated customer details.
+   
+6. Define parameters for a DynamoDB update operation:
+   a. Set TableName as 'Customer'.
+   b. Set Key with the extracted customer ID.
+   c. Define an UpdateExpression to set the customer_details attribute.
+   d. Define ExpressionAttributeValues to specify the new customer details.
+   e. Set ReturnValues as 'ALL_NEW' to return the updated item.
+
+7. Execute the DynamoDB update operation using the DocumentClient instance and the constructed parameters.
+
+8. If the update operation is successful:
+   - Return a success response with status code 200 and a message indicating the successful update along with the updated item data.
+   
+9. If an error occurs during the update operation:
+   - Return an error response with status code 500 and a message indicating the error encountered.
+
+##  CustomerDeleteById -
+
+1. Import the AWS SDK module.
+
+2. Configure the AWS SDK to connect to the local DynamoDB instance.
+
+3. Create a DynamoDB DocumentClient instance.
+
+4. Define a Lambda function named deleteCustomer to delete customer data from DynamoDB.
+
+5. Try the following:
+   a. Extract the customer ID from the event's path parameters.
+   b. Check if the customer ID is provided in the path parameters. If not, return a 400 Bad Request response.
+
+6. Define parameters for a DynamoDB delete operation:
+   a. Set TableName as 'Customer'.
+   b. Set Key with the extracted customer ID.
+
+7. Execute the DynamoDB delete operation using the DocumentClient instance and the constructed parameters.
+
+8. If the delete operation is successful:
+   - Return a success response with status code 200 and a message indicating the successful deletion of the customer.
+
+9. If an error occurs during the delete operation:
+   - Return an error response with status code 500 and a message indicating the error encountered during deletion.
+
+#  dynamodb lambda API
+ 
+## Overview
+- The API's pseudo code includes logic for inserting, retrieving, updating, and deleting customer data in a DynamoDB 'Customer' table, emphasizing CRUD operations and error handling.
+ 
+# InsertCustomer Function
+
+## Logic
+
+- **Parse the incoming event to extract the request body.**
+- **Extract the value from the request body: details.**
+- **Generate a unique identifier (e.g., customer_Id) using uuidv4.**
+- **Create a DynamoDB `params` object with the following:**
+  - TableName: 'Customer'
+  - Item: Object containing customer_Id and details.
+- **Use the DynamoDB `post` method to insert the data into the 'Customer' table.**
+- **If successful:**
+  - Return a response with status code 200 OK.
+  - Include a success message in the response body.
+- **If an error occurs:**
+  - Return a response with status code 500 Internal Server Error.
+  - Include an error message in the response body.
+
+# GetCustomerById Function
+
+## Logic
+
+- **Extract the value from the path parameters: customer_Id.**
+- **If customer_Id is missing:**
+   - Return a response with status code 400 Bad Request.
+   - Include a message indicating that Customer ID is required.
+- **Create a DynamoDB `params` object with the following:**
+   - TableName: 'Customer'
+   - Key: Object containing customer_Id.
+- **Try to get data from DynamoDB using the `get` method.**
+- **If successful:**
+   - Return a response with status code 200 OK.
+   - Include the retrieved customer data in the response body.
+- **If an error occurs:**
+   - Return a response with status code 500 Internal Server Error.
+   - Include an error message in the response body.
+
+# GetAllCustomer Function
+
+## Logic
+
+- **Create a DynamoDB `params` object with the following:**
+   - TableName: 'Customer'
+- **Try to scan data from DynamoDB using the `scan` method.**
+- **If successful:**
+   - Return a response with status code 200 OK.
+   - Include the list of all customer data in the response body.
+- **If an error occurs:**
+   - Return a response with status code 500 Internal Server Error.
+   - Include an error message in the response body.
+
+# UpdateCustomer Function
+
+## Logic
+
+- **Extract the value from the path parameters: customer_Id.**
+- **Parse the incoming event to extract the request body.**
+- **Extract the updated value from the request body: details.**
+- **Create a DynamoDB `params` object with the following:**
+   - TableName: 'Customer'
+   - Key: Object containing customer_Id.
+   - UpdateExpression: 'SET details = :details'
+   - ExpressionAttributeValues: { ':details': details }
+   - ReturnValues: 'ALL_NEW'
+- **Try to update data in DynamoDB using the `update` method.**
+- **If successful:**
+   - Return a response with status code 200 OK.
+   - Include a message and the updated customer data in the response body.
+- **If an error occurs:**
+   - Return a response with status code 500 Internal Server Error.
+   - Include an error message in the response body.
+
+# DeleteCustomer Function
+
+## Logic
+
+- **Extract the value from the path parameters: customer_Id.**
+- **If customer_Id is missing:**
+   - Return a response with status code 400 Bad Request.
+   - Include a message indicating that Customer ID is required.
+- **Create a DynamoDB `params` object with the following:**
+   - TableName: 'Customer'
+   - Key: Object containing customer_Id.
+- **Try to delete data from DynamoDB using the `delete` method.**
+- **If successful:**
+   - Return a response with status code 200 OK.
+   - Include a success message in the response body.
+- **If an error occurs:**
+   - Return a response with status code 500 Internal Server Error.
+   - Include an error message in the response body.
