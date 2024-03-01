@@ -240,7 +240,7 @@ The "Update Order Status" functionality allows users to modify the status of an 
 ```json
 {
   "orderId": "12345",
-  "status": "confirmed"
+  "status": "cancell"
 }
 ```
 
