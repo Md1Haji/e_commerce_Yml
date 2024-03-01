@@ -763,7 +763,7 @@ http://localhost:3000/dev/Products/f92c4124-f6ad-468d-bf1b-3e7bd1eccd0e
 
 #### Responses:
 
-1.204 No Content: Product deleted successfully  
+1.200 No Content: Product deleted successfully  
 2.404 Not Found: Product with the specified ID not found  
 3.500 Internal Server Error: Error response.
 
