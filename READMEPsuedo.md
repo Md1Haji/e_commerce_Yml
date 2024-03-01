@@ -934,7 +934,7 @@ http://localhost:3000/dev/Products/f92c4124-f6ad-468d-bf1b-3e7bd1eccd0e
 
 7. Construct parameters for DynamoDB put operation:
    - Define TableName as 'Customer'
-   - Set Item with customer_Id and customer_details
+   - Set Item with customer_Id and details
 
 8. Execute DynamoDB put operation using the DocumentClient instance and the constructed parameters
 
