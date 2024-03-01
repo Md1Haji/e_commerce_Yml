@@ -420,124 +420,352 @@ The "Update Order Status" functionality allows users to modify the status of an 
 -->In this appilcation we are using node js serverless code to delete inventory details of a particular id.
 
 
-
-#### PRODUCT API WITH DYNAMODB 
+#### PRODUCT API  
  
-## Overview
+##### Overview:
  
      This API allows users to manage products, including inserting, retrieving, updating, and deleting product records.
- 
-### Insert product
 
-    Endpoint: baseUrl/dev/product
+#### Technologies Used:
 
-    Method: POST
+    - Node.js
+    - AWS SDK for JavaScript (v3)
+    - AWS DynamoDB
 
-    Description: Insert a new product into the 'product' collection.
+#### Setup:
 
-    Request Body:
+1. Install Node.js and npm.
+2. Install dependencies: `npm install`.
+3. Set up AWS credentials in the local environment or AWS configuration file.
 
-    - `name` (string): The name of the product.
-    - `description` (string): The description of the product.
-    - `price` (number): the price of the product.
-    - `quantity` (number): the quantity of the product.
-    - `unit` (number): the unit of the product in kg and piece.
-    - `category` (string):the category of the product.
-    - `image` (string):the image of the product.
+#### Operations:
 
-    Product data including name, description, price, and quantity. 
+### Create product (POST):
 
-    Responses:
+#### Description:
 
-    201 Created: Product created successfully
-    400 Bad Request: Invalid request body
-    500 Internal Server Error: Error response.
-    
+Creates a new product in the database.
 
-### Retrieve product
+#### Input:
 
-    Endpoint: baseUrl/dev/product
+- name (string): The name of the product.
+- description (string): The description of the product.
+- price (number): the price of the product.
+- quantity (number): the quantity of the product.
+- unit (number): the unit of the product in kg and piece.
+- category (string):the category of the product.
+- image (string):the image of the product.
 
-    Method: GET
+#### Workflow:
 
-    Description: Retrieve all product from the 'product' collection..
+1. Parse input data from the request body.
+2. Generate a unique product ID.
+3. Connect to the database (e.g., AWS DynamoDB).
+4. Insert the product into the database.
+5. Return a success message with the product ID.
 
-    Responses:
+#### Method: POST
 
-    200 OK: Successful response with the product data
-    404 Not Found: Product with the specified ID not found
-    500 Internal Server Error: Error response.
+#### Logic:
 
+1. Connect to the DynamoDB database.
+2. insert all product data in the database using AWS DynamoDB.
 
-### Retrieve product by ID
+#### Request Body:
 
-    Endpoint: baseUrl/dev/product/{id}
+```json
+{
+  "name": "tv",
+  "description": "Product Description",
+  "price": 3000,
+  "quantity": 10,
+  "unit": {
+    "PIECE": 10
+  },
+  "category": "electronics",
+  "image": "https://example.com/image.jpg"
+}
+```
 
-    Method: GET
-    
-    Description: Retrieve a specific product by its ID from the 'product' collection.
-
-    Parameters:
-
-    id (path parameter): The ID of the product to retrieve.
-
-    Responses:
-
-    200 OK: Successful response with the product data
-    404 Not Found: Product with the specified ID not found
-    500 Internal Server Error: Error response.
-
-
- 
-### Update product
-
-    Endpoint: baseUrl/dev/product/{id}
-
-    Method: PUT
-
-    Description: Update an existing product in the 'product' collection.
-
-    Parameters:
-
-    id (path parameter): The ID of the product to update.
-
-    Request Body:
-
-    - `name` (string): The name of the product.
-    - `description` (string): The description of the product.
-    - `price` (number): the price of the product.
-    - `quantity` (number): the quantity of the product.
-    - `unit` (number): the unit of the product in kg and piece.
-    - `category` (string):the category of the product.
-    - `image` (string):the image of the product.
-
-    Responses:
-
-    200 OK: Product updated successfully
-    404 Not Found: Product with the specified ID not found
-    500 Internal Server Error: Error response.
+#### Responses:
+1. 201 Created: Product created successfully
+2. 400 Bad Request: Invalid request body
+3. 500 Internal Server Error: Error response.
 
 
-### Delete product
+### Get All product (GET)
 
-    Endpoint: baseUrl/dev/product/{productId}
+#### Description:
 
-    Method: DELETE
+Retrieves all product stored in the database.
 
-    Description: Delete an existing product from the 'product' collection.
-    
-    Parameters:
-    
-    id (path parameter): The ID of the product to delete.
-    
-    Responses:
+#### Workflow:
 
-    204 No Content: Product deleted successfully
-    
-    404 Not Found: Product with the specified ID not found
-    
-    500 Internal Server Error: Error response.
+1. Connect to the database (e.g., AWS DynamoDB).
+2. Retrieve all product from the database.
+3. Return the list of product.
 
+#### Response:
+
+- **Status Code:** 200 (OK)
+- **Body:** JSON array containing details of all product.
+
+#### Logic:
+
+1. Connect to the database.
+2. Retrieve all product from the database using AWS DynamoDB.
+
+#### Example Response:-
+
+```json
+[
+    {
+        "image": {
+            "S": "C:\\Users\\Hi\\Pictures\\Screenshots\\Screenshot 2024-01-16 161402.png"
+        },
+        "unit": {
+            "M": {
+                "kg": {
+                    "N": 50
+                }
+            }
+        },
+        "quantity": {
+            "N": 50
+        },
+        "productId": "8c2af27c-1ce4-400b-b4e1-0117bfc7d0cf",
+        "price": {
+            "N": 50
+        },
+        "name": {
+            "S": "washine machine"
+        },
+        "description": {
+            "S": "Updated Product Description"
+        },
+        "category": {
+            "S": "electronics"
+        }
+    },
+    {
+        "image": {
+            "S": "C:\\Users\\Hi\\Pictures\\Screenshots\\Screenshot 2024-01-16 161402.png"
+        },
+        "unit": {
+            "M": {
+                "kg": {
+                    "N": "50"
+                }
+            }
+        },
+        "quantity": {
+            "N": "50"
+        },
+        "productId": "77cb44bb-cc53-43c7-b9d1-75ae7502ab9a",
+        "price": {
+            "N": "200"
+        },
+        "name": {
+            "S": "apple"
+        },
+        "description": {
+            "S": "Updated Product Description"
+        },
+        "category": {
+            "S": "fruits"
+        }
+    }
+]
+```
+
+#### Responses:
+1. 200 OK : Successful response with the product data
+2. 404 Not Found : Product with the specified ID not found
+3. 500 Internal Server Error : Error response.
+
+
+### Get product By ID (GET):
+
+#### Description:
+
+Retrieves a specific product from the database based on its unique product ID.
+
+#### Input:
+
+- id: Unique identifier of the product to retrieve.
+
+#### Workflow:
+
+1. Connect to the database (e.g., AWS DynamoDB).
+2. Retrieve the product with the specified ID from the database.
+3. Return the product details if found.
+
+#### path parameters:
+
+- id: Unique identifier of the product to retrieve.
+
+#### Response:
+
+- **Status Code:** 200 (OK) if the product is found.
+- **Body:** JSON object containing details of the product.
+
+#### Logic:
+
+1. Connect to the database.
+2. Retrieve the product with the specified ID from the database using AWS DynamoDB.
+
+#### Example Response:-
+
+```json
+{
+        "image": {
+            "S": "C:\\Users\\Hi\\Pictures\\Screenshots\\Screenshot 2024-01-16 161402.png"
+        },
+        "unit": {
+            "M": {
+                "kg": {
+                    "N": 50
+                }
+            }
+        },
+        "quantity": {
+            "N": 50
+        },
+        "productId": "8c2af27c-1ce4-400b-b4e1-0117bfc7d0cf",
+        "price": {
+            "N": 50
+        },
+        "name": {
+            "S": "washine machine"
+        },
+        "description": {
+            "S": "Updated Product Description"
+        },
+        "category": {
+            "S": "electronics"
+        }     
+}
+```
+#### Responses:
+1. 200 OK: Successful response with the product data
+2. 404 Not Found: Product with the specified ID not found
+3. 500 Internal Server Error: Error response.
+
+
+### Update product (PUT):
+
+#### Description:
+
+Updates the details of an existing product in the database based on its unique product ID.
+
+#### Input
+- name (string): The name of the product.
+- description (string): The description of the product.
+- price (number): the price of the product.
+- quantity (number): the quantity of the product.
+- unit (number): the unit of the product in kg and piece.
+- category (string):the category of the product.
+- image (string):the image of the product.
+
+#### Workflow
+1. Connect to the database (e.g., AWS DynamoDB).
+2. Retrieve the existing product details based on the provided product ID.
+3. Update the specified fields of the product with the new values.
+4. Save the updated product details in the database.
+5. Return a success message with the updated product details.
+
+#### path parameters:
+
+- id: Unique identifier of the product to update the data.
+
+#### Logic:
+
+1. Connect to the database.
+2. Retrieve the product with the specified ID from the database using AWS DynamoDB.
+
+#### Request Body:-
+
+```json
+{
+        "image": {
+            "S": "C:\\Users\\Hi\\Pictures\\Screenshots\\Screenshot 2024-01-16 161402.png"
+        },
+        "unit": {
+            "M": {
+                "kg": {
+                    "N": 50
+                }
+            }
+        },
+        "quantity": {
+            "N": 50
+        },
+        "productId": "8c2af27c-1ce4-400b-b4e1-0117bfc7d0cf",
+        "price": {
+            "N": 50
+        },
+        "name": {
+            "S": "washine machine"
+        },
+        "description": {
+            "S": "Updated Product Description"
+        },
+        "category": {
+            "S": "electronics"
+        }     
+}
+```
+   
+#### Responses:
+1. 200 OK: Product updated successfully
+2. 404 Not Found: Product with the specified ID not found
+3. 500 Internal Server Error: Error response.
+
+
+### Delete product (DELETE):
+
+#### Description:
+
+Deletes an existing product from the database based on its unique product ID.
+
+#### Input:
+
+- `id`: Unique identifier of the product to delete.
+
+#### Workflow:
+
+1. Connect to the database (e.g., AWS DynamoDB).
+2. Check if the product exists based on the provided product ID.
+3. If the product exists, delete it from the database.
+4. Return a success message indicating the deletion.
+
+#### path Parameters:
+
+- `id`: Unique identifier of the product to delete.
+
+#### Response:
+
+- **Status Code:** 204 (No Content) if the product is deleted successfully.
+- **Body:** None
+
+#### Logic
+1. Connect to the database.
+2. Check if the product exists based on the provided product ID.
+3. If the product exists, delete it from the database.
+
+#### Example Request
+
+``` http
+
+http://localhost:3000/dev/Products/f92c4124-f6ad-468d-bf1b-3e7bd1eccd0e
+
+```
+
+#### Responses:
+
+1.204 No Content: Product deleted successfully  
+2.404 Not Found: Product with the specified ID not found  
+3.500 Internal Server Error: Error response.
 
 # SearchCart Function
 
