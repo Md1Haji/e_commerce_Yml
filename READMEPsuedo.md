@@ -730,7 +730,7 @@ Deletes an existing product from the database based on its unique product ID.
 
 #### Input:
 
-- `id`: Unique identifier of the product to delete.
+- id: Unique identifier of the product to delete.
 
 #### Workflow:
 
@@ -741,7 +741,7 @@ Deletes an existing product from the database based on its unique product ID.
 
 #### path Parameters:
 
-- `id`: Unique identifier of the product to delete.
+- id: Unique identifier of the product to delete.
 
 #### Response:
 
